@@ -19,7 +19,7 @@
 
 use strict;
 
-use DBSchema::Normalizer;
+use DBSchema::Normalizer 0.08;
 
 =pod instantiating a DBSchema::Normalizer object
 
@@ -34,6 +34,10 @@ use DBSchema::Normalizer;
 
 =cut
 
+=pod
+
+# calling the constructor with DSN parameters
+# 
 my $norm = DBSchema::Normalizer->new ( 
 	{
 		DSN           => "DBI:mysql:music;host=localhost"  # change database and host if different
@@ -47,6 +51,28 @@ my $norm = DBSchema::Normalizer->new (
 		copy_indexes  =>  1, # if "1", indexes are recreated into dest_table before data insertion
 		simulate      =>  1  # Does not perform anything on the database, but only print the SQL statements
 	 });
+
+=cut
+
+
+# New constructor available in 0.08, passing a database handler
+#
+my $dbh = DBI->connect("DBI:mysql:music;host=localhost"
+    . ";mysql_read_default_file=$ENV{HOME}/.my.cnf", undef, undef, {RaiseError=>1});
+
+my $norm = DBSchema::Normalizer->new ( 
+	{
+		dbh           => $dbh,
+	  	src_table     => "MP3",
+	  	index_field   => "album_id",
+	  	lookup_fields => "artist,album,genre",
+	  	lookup_table  => "tmp_albums", 
+		dest_table    => "songs",
+		verbose       =>  2, # A LOT of information. Change to "1" to reduce it
+		copy_indexes  =>  1, # if "1", indexes are recreated into dest_table before data insertion
+		simulate      =>  0  # Does not perform anything on the database, but only print the SQL statements
+	 });
+
 
 
 =pod carrying out the actions

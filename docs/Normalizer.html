@@ -1,7 +1,7 @@
 <HTML>
 <HEAD>
 <TITLE>DBSchema::Normalizer - database normalization. - Convert a table from 1st to 2nd normal form</TITLE>
-<LINK REV="made" HREF="mailto:fg@bi.mandrakesoft.com">
+<LINK REV="made" HREF="mailto:compil@bi.mandrakesoft.com">
 </HEAD>
 
 <BODY>
@@ -375,6 +375,9 @@ Please refer to the GPL, GNU General Public License, Version 2, paragraphs 11 an
         DSN
         username
         password</PRE>
+<P>Alternatively, you may pass one already initialized database handler</P>
+<PRE>
+    dbh =&gt; $dbh</PRE>
 <P>Optional fields (in the sense that if you omit them here, you must declare them when calling <EM>create_lookup_table</EM> or <EM>create_normalized_table</EM>)</P>
 <PRE>
         src_table       The table in 1st normal form
@@ -490,7 +493,7 @@ Lookup fields in the source table will be replaced by the corresponding index fi
 <P>
 <HR>
 <H1><A NAME="author">AUTHOR</A></H1>
-<P>Giuseppe Maxia, <A HREF="mailto:gmax@karma.oltrelinux.com">gmax@karma.oltrelinux.com</A></P>
+<P>Giuseppe Maxia, <A HREF="mailto:giuseppe@gmaxia.it">giuseppe@gmaxia.it</A></P>
 <P>
 <HR>
 <H1><A NAME="copyright">COPYRIGHT</A></H1>

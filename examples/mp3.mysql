@@ -11,7 +11,7 @@
 CREATE DATABASE IF NOT EXISTS music;
 USE music;
 
-# DROP TABLE IF EXISTS `MP3`;
+#DROP TABLE IF EXISTS `MP3`;
 CREATE TABLE `MP3` (
   `ID` int(11) NOT NULL auto_increment,
   `title` varchar(40) NOT NULL default '',

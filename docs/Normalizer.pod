@@ -358,6 +358,10 @@ new() - object constructor. Requires a hash reference with at least the followin
 	username
 	password
 
+Alternatively, you may pass one already initialized database handler
+
+    dbh => $dbh
+
 Optional fields (in the sense that if you omit them here, you must declare them when calling I<create_lookup_table> or I<create_normalized_table>)
 
 	src_table       The table in 1st normal form
@@ -504,7 +508,7 @@ Parameters are passed as a hash reference, and should include the following
 
 =head1 AUTHOR
 
-Giuseppe Maxia, gmax@karma.oltrelinux.com
+Giuseppe Maxia, giuseppe@gmaxia.it
 
 =head1 COPYRIGHT
 

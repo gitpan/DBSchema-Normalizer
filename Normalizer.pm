@@ -367,9 +367,9 @@ our @ISA = qw(Exporter);
 our @EXPORT = qw(new snew do );
 our @EXPORT_OK = qw(create_lookup_table create_normalized_table);
 
-our $VERSION = '0.07'; # 02-Feb-2002
+our $VERSION = '0.08'; # 09-Nov-2002
 
-my @_accepted_parameters = qw(DSN username password src_table index_field 
+my @_accepted_parameters = qw(dbh DSN username password src_table index_field 
     lookup_fields lookup_table dest_table copy_indexes verbose 
 	simulate ignore_warning);
 
@@ -392,6 +392,10 @@ new() - object constructor. Requires a hash reference with at least the followin
 	DSN
 	username
 	password
+
+Alternatively, you may pass one already initialized database handler
+
+    dbh => $dbh
 
 Optional fields (in the sense that if you omit them here, you must declare them when calling I<create_lookup_table> or I<create_normalized_table>)
 
@@ -438,8 +442,15 @@ If the keys for src_table, index_field, lookup table and fields are missing, the
 sub new {
 	my $class = shift;
 	my $params = shift;
-	my $_dbh = DBI->connect($params->{DSN}, $params->{username}, 
+	my $_dbh = undef;
+    if (exists $params->{dbh} && defined $params->{dbh}) {
+        $_dbh = $params->{dbh}
+    }
+    else {
+        return undef unless defined $params->{DSN};
+        $_dbh= DBI->connect($params->{DSN}, $params->{username}, 
 		$params->{password}, { RaiseError => 1});
+    }
 	my $self = bless {
 		verbose         => 0,
 		copy_indexes    => 0,
@@ -925,7 +936,7 @@ sub create_lookup_table {
 
 =head1 AUTHOR
 
-Giuseppe Maxia, gmax@karma.oltrelinux.com
+Giuseppe Maxia, giuseppe@gmaxia.it
 
 =head1 COPYRIGHT
 

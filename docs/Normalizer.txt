@@ -465,6 +465,10 @@ Class methods
                 username
                 password
 
+        Alternatively, you may pass one already initialized database handler
+
+            dbh => $dbh
+
         Optional fields (in the sense that if you omit them here, you must
         declare them when calling *create_lookup_table* or
         *create_normalized_table*)
@@ -606,7 +610,7 @@ Class methods
                            to be created
 
 AUTHOR
-    Giuseppe Maxia, gmax@karma.oltrelinux.com
+    Giuseppe Maxia, giuseppe@gmaxia.it
 
 COPYRIGHT
     The DBSchema::Normalizer module is Copyright (c) 2001 Giuseppe Maxia,
